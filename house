@@ -1,0 +1,58 @@
+Uses GraphABC;
+
+var
+  x, y, k, n: integer;
+
+procedure house(x, y: integer);
+var
+  y1, x1, w, w1, w2, w3, h, h1, h2, h3: integer;
+begin
+  x1 := x + random(40, 60);
+  y1 := y + random(80, 120);
+  w := (x1 - x) div 5 * 1 + x;
+  w1 := (x1 - x) div 5 * 3 + x;
+  w2 := (x1 - x) div 5 * 2 + x;
+  w3 := (x1 - x) div 5 * 4 + x;
+  h := (y1 - y) div 5 * 1 + y;
+  h1 := (y1 - y) div 5 * 3 + y;
+  h2 := (y1 - y) div 5 * 2 + y;
+  h3 := (y1 - y) div 5 * 4 + y;
+  SetBrushColor(clRandom);
+  Rectangle(x, y, x1, y1);
+  SetBrushColor(clRandom);
+  w2 := random(w2 - 4, w2 + 4);
+  h2 := random(h2 - 6, h2 + 6);
+  Rectangle(w, h, w2, h2);
+  SetBrushColor(clRandom);
+  h2 := (y1 - y) div 5 * 2 + y;
+  w3 := random(w3 - 4, w3 + 4);
+  h2 := random(h2 - 6, h2 + 6);
+  Rectangle(w1, h, w3, h2);
+  SetBrushColor(clRandom);
+  w2 := (x1 - x) div 5 * 2 + x;
+  w2 := random(w2 - 4, w2 + 4);
+  h3 := random(h3 - 6, h3 + 6);
+  Rectangle(w, h1, w2, h3);
+  SetBrushColor(clRandom);
+  h3 := (y1 - y) div 5 * 4 + y;
+  w3 := (x1 - x) div 5 * 4 + x;
+  w3 := random(w3 - 4, w3 + 4);
+  h3 := random(h3 - 6, h3 + 6);
+  Rectangle(w1, h1, w3, h3);
+  SetBrushColor(clRandom);
+  polygon((x, y), (x1, y), ((x + x1) div 2, y - (y1 - y) div 8));
+  Redraw;
+end;
+
+begin
+  LockDrawing;
+  Read(n);
+  for k := 1 to n do
+  begin
+    SetWindowSize(660, 720);
+    CenterWindow;
+    x := random(0, 600);
+    y := random(0, 600);
+    house(x, y);
+  end;
+end.
