@@ -1,0 +1,42 @@
+Uses GraphABC;
+var
+  n, m, k, n1, n2 : integer;
+procedure 1(n : integer);
+begin
+  if n < 0 then
+    n := 0;
+  While (k<n) do
+  begin
+    k:= k+1;
+    Rectangle(200,700,400,700-k*100);
+  end;
+end;
+procedure 2(m : integer);
+begin
+  if m < 0 then
+    m := 0;
+    While (k<m) do
+  begin
+    k:= k+1;
+    Rectangle(600,700,800,700-k*100);
+  end;
+end;
+BEGIN
+  LockDrawing;
+  SetWindowSize(1000, 700);
+  n := 7;
+  m := 7;
+  While ((n+m) > 0) do
+  begin  
+    While ((n1 < 1) or (n1 > 2)) or (n2 < 0) do
+      Read(n1, n2);
+    If n1 = 1 then
+      n := n-n2;
+    else
+      m := m-m2;
+    1(n);
+    k := 0;
+    2(m);
+    k := 0;
+  end;
+END.
