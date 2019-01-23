@@ -1,42 +1,52 @@
 Uses GraphABC;
 var
-  n, m, k, n1, n2 : integer;
-procedure 1(n : integer);
+  n, m, k, n1, n2: integer;
+procedure f(n: integer);
 begin
-  if n < 0 then
-    n := 0;
-  While (k<n) do
+  k := 0;
+  while (k < n) do
   begin
-    k:= k+1;
-    Rectangle(200,700,400,700-k*100);
+    k := k + 1;
+    DrawRectangle(200, 700, 400, 700 - k * 100);
   end;
+  Redraw;
 end;
-procedure 2(m : integer);
+procedure s(m: integer);
 begin
-  if m < 0 then
-    m := 0;
-    While (k<m) do
+  k := 0;
+  while (k < m) do
   begin
-    k:= k+1;
-    Rectangle(600,700,800,700-k*100);
+    k := k + 1;
+    DrawRectangle(600, 700, 800, 700 - k * 100);
   end;
+  Redraw;
 end;
-BEGIN
+begin
   LockDrawing;
   SetWindowSize(1000, 700);
+  CenterWindow;
   n := 7;
   m := 7;
-  While ((n+m) > 0) do
-  begin  
-    While ((n1 < 1) or (n1 > 2)) or (n2 < 0) do
+  f(n);
+  s(m);
+  Sleep(10);
+  while ((n + m) > 0) do
+  begin
+    Read(n1, n2);
+    while ((n1 < 1) or (n1 > 2)) or (n2 < 0) do
+    begin
       Read(n1, n2);
-    If n1 = 1 then
-      n := n-n2;
+    end;
+    if n1 = 2 then
+      n := n - n2
     else
-      m := m-m2;
-    1(n);
-    k := 0;
-    2(m);
-    k := 0;
+      m := m - n2;
+    ClearWindow;
+    if n < 0 then
+      n := 0;
+    if m < 0 then
+      m :=0;
+    s(n);
+    f(m);
   end;
-END.
+end.
