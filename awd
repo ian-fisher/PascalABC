@@ -1,0 +1,109 @@
+uses GraphABC;
+
+var
+  n, z: integer;                        
+  IsBlack, Correct: boolean;
+
+procedure GovorushaYasha();
+var
+  row, col: integer;
+begin
+  IsBlack := true;
+  for row := 1 to n do
+  begin
+    if IsBlack = true
+      then 
+    begin
+      IsBlack := false;
+      SetBrushColor(clSilver);
+    end
+    else 
+    begin
+      IsBlack := true;
+      SetBrushColor(clMaroon);
+    end;
+    for col := 1 to n do
+    begin
+      if BrushColor() = clMaroon then
+        SetBrushColor(clSilver)
+      else SetBrushColor(clMaroon);
+      rectangle((row * 25 + 1) * z - 104, (col * 25 + 1) * z - 104, (row * 25 + 25 + 1) * z - 104, z * (col * 25 + 25 + 1) - 104);
+    end;
+  end;
+end;
+
+procedure GovorushaRiba(x, y, vk: integer);
+var
+  x1, y1, x2, y2: integer;
+begin
+  x2 := x div 100 * 100 + 50;
+  y2 := y div 100 * 100 + 50;
+  if correct = True then
+  begin
+    if x > 800 then
+      x := 750;
+    if y > 800 then
+      y := 750;
+    x1 := x;
+    y1 := y;
+    GovorushaYasha();
+    SetBrushColor(ARGB(95, 125, 50, 200));
+    Circle(x2, y2, 49);
+  end;
+  //x,y - центр старой клетки
+  //х1, у1 - центр новой клетки
+  x1 := x div 100 * 100 + 50;
+  y1 := y div 100 * 100 + 50;
+  if ((x1 = x2 + 100) and (y1 = y2 - 200) 
+  or (x1 = x2 + 100) and (y1 = y2 + 200) 
+  or (x1 = x2 - 100) and (y1 = y2 - 200) 
+  or (x1 = x2 - 100) and (y1 = y2  + 200) 
+  or (x1 = x2 + 200) and (y1 = y2 + 100) 
+  or (x1 = x2 + 200) and (y1 = y2 - 100) 
+  or (x1 = x2 - 200) and (y1 = y2 - 100) 
+  or (x1 = x2 - 200) and (y1 = y2 + 100)) then
+    correct := True
+  else
+    correct := False;
+end;
+
+begin
+  SetWindowSize(800, 800);
+  CenterWindow;
+  n := 8;
+  z := 4;
+  correct := true;
+  GovorushaYasha();
+  OnMouseDown := GovorushaRiba;
+end.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
