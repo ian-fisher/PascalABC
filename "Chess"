@@ -1,0 +1,141 @@
+uses GraphABC;
+
+var
+  x2, y2, x1, y1, f, x3, y3, h, e, size: integer;
+  IsBlack, Correct1, correct2, start: boolean;
+
+procedure Doska(n, z: integer);
+var
+  row, col: integer;
+begin
+  IsBlack := true;
+  for row := 1 to n do
+  begin
+    if IsBlack = true
+      then 
+    begin
+      IsBlack := false;
+      SetBrushColor(clSilver);
+    end
+    else 
+    begin
+      IsBlack := true;
+      SetBrushColor(clMaroon);
+    end;
+    for col := 1 to n do
+    begin
+      if BrushColor() = clMaroon then
+        SetBrushColor(clSilver)
+      else SetBrushColor(clMaroon);
+      rectangle((row * 25 + 1) * z - 104, (col * 25 + 1) * z - 104, (row * 25 + 25 + 1) * z - 104, z * (col * 25 + 25 + 1) - 104);
+    end;
+  end;
+end;
+
+procedure Konb(x, y, vk: integer);
+var
+  size: integer;
+begin
+  correct1 := False;
+  correct2 := False;
+  if x > 800 then
+    x := 750;
+  if y > 800 then
+    y := 750;
+  x1 := x div 100 * 100 + 50;
+  y1 := y div 100 * 100 + 50;
+  if ((x1 = x2 + 100) and (y1 = y2 - 200)
+       or (x1 = x2 + 100) and (y1 = y2 + 200) 
+       or (x1 = x2 - 100) and (y1 = y2 - 200) 
+       or (x1 = x2 - 100) and (y1 = y2 + 200) 
+       or (x1 = x2 + 200) and (y1 = y2 + 100) 
+       or (x1 = x2 + 200) and (y1 = y2 - 100) 
+       or (x1 = x2 - 200) and (y1 = y2 - 100) 
+       or (x1 = x2 - 200) and (y1 = y2 + 100)) and (f = 1) then
+  begin
+    correct1 := True;
+  end
+  else
+  if (h = 1) and (start = False) then
+  begin
+    h := 2;
+    SetBrushColor(RGB(200, 125, 50));
+    x3 := x1;
+    y3 := y1;
+    Circle(x3, y3, e);
+  end;
+  if ((x1 = x3 + 100) and (y1 = y3 - 200) 
+        or (x1 = x3 + 100) and (y1 = y3 + 200) 
+        or (x1 = x3 - 100) and (y1 = y3 - 200) 
+        or (x1 = x3 - 100) and (y1 = y3 + 200) 
+        or (x1 = x3 + 200) and (y1 = y3 + 100) 
+        or (x1 = x3 + 200) and (y1 = y3 - 100) 
+        or (x1 = x3 - 200) and (y1 = y3 - 100) 
+        or (x1 = x3 - 200) and (y1 = y3 + 100)) and (f = 2) then
+  begin
+    correct2 := True;
+  end;
+  
+  if start = True then
+  begin
+    start := False;
+    SetBrushColor(RGB(125, 50, 200));
+    Circle(x1, y1, e);
+    x2 := x1;
+    y2 := y1;
+  end;
+  if (correct1 = True) then
+  begin
+    Doska(8, 4);
+    x2 := x1;
+    y2 := y1;
+    if h = 2 then
+    begin
+      SetBrushColor(RGB(200, 125, 50));
+      Circle(x3, y3, e);
+      f := 2;
+    end;
+    SetBrushColor(RGB(125, 50, 200));
+    Circle(x2, y2, e);
+  end
+  else if (correct2 = True) then
+  begin
+    x3 := x1;
+    y3 := y1;
+    Doska(8, 4);
+    SetBrushColor(RGB(125, 50, 200));
+    Circle(x2, y2, e);
+    SetBrushColor(RGB(200, 125, 50));
+    Circle(x3, y3, e);
+    f := 1;
+  end;
+  if (x2 = x3) and (y2 = y3) then
+  begin
+    for size := 2 to 20 do
+    begin
+      Sleep(500);
+      e := e + size * 5;
+      if f = 2 then
+      begin
+        SetBrushColor(RGB(125, 50, 200));
+        Circle(x2, y2, e);
+      end
+      else
+        SetBrushColor(RGB(200, 125, 50));
+      Circle(x3, y3, e);
+    end;
+  end;
+end;
+
+begin
+  e := 49;
+  start := True;
+  SetWindowSize(800, 800);
+  CenterWindow;
+  f := 1;
+  h := 1;
+  x3 := 10000;
+  y3 := 10000;
+  Doska(8, 4);
+  OnMouseDown := Konb;
+end.
