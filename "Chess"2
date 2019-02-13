@@ -1,0 +1,27 @@
+Uses GraphABC;
+
+var
+  a: array[1..100] of integer;
+  n, m, x: integer;
+PROCEDURE MOVE(vk : integer);
+Begin
+  
+End;
+
+begin
+  Read(n);
+  if (n > 7) or (n < 0) then
+    ClearWindow(clBlue)
+    else
+  begin
+      SetBrushColor(ARGB(100, 125, 50, 200));
+      Circle(20, 460, 20);
+      SetBrushColor(ARGB(100, 50, 200, 125));
+    for m := 1 to n do
+    begin
+      a[m] := random(25, 50);
+    Rectangle(x, 480, 640 - x, 480 - a[m]);
+    x := x + 40
+    end;
+  end;
+end.
