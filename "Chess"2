@@ -2,26 +2,37 @@ Uses GraphABC;
 
 var
   a: array[1..100] of integer;
-  n, m, x: integer;
-PROCEDURE MOVE(vk : integer);
-Begin
-  
-End;
+  n, m, x, d, x1, v, k : integer;
+
+procedure MOVE(vk: integer);
+begin
+  k := k + 1;
+  SetBrushColor(clWhite);
+  Circle(x1, 480 - v[k], 20);
+  SetBrushColor(ARGB(100, 125, 50, 200));
+  x1 := x1 + d;
+  Circle(x1, 480 - v[k], 20);
+end;
 
 begin
   Read(n);
-  if (n > 7) or (n < 0) then
+  x1 := 20;
+  d :=  640 div n - 40 div n;
+  x := 40;
+  if (n > 10) or (n < 0) then
     ClearWindow(clBlue)
-    else
+  else
   begin
-      SetBrushColor(ARGB(100, 125, 50, 200));
-      Circle(20, 460, 20);
-      SetBrushColor(ARGB(100, 50, 200, 125));
+    SetBrushColor(ARGB(100, 125, 50, 200));
+    Circle(x1, 460, 20);
+    SetBrushColor(ARGB(100, 50, 200, 125));
     for m := 1 to n do
     begin
-      a[m] := random(25, 50);
-    Rectangle(x, 480, 640 - x, 480 - a[m]);
-    x := x + 40
+      v[m] := random(25, 400);
+      a[m] := v;
+      Rectangle(x, 480, x + d, 480 - a[m]);
+      x := x + d;
     end;
+    OnKeyDown := Move;
   end;
 end.
