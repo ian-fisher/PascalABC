@@ -1,37 +1,89 @@
 Uses GraphABC;
 
 var
-  a: array[1..100] of integer;
-  n, m, x, d, x1, v, k : integer;
+  v, x, x1: array[-1..100] of integer;
+  n, m, d, k, start, l, cf: integer;
 
 procedure MOVE(vk: integer);
 begin
-  k := k + 1;
+  if (x[k] + d div 2) < 640 then
+  begin
+    if vk <> vk_Up then
+    begin
+      if start = 0 then
+      begin
+        SetBrushColor(clWhite);
+        Circle(x[k] - d div 2, 459 - v[k], 20);
+      end
+      else
+      begin
+        SetBrushColor(clWhite);
+        Circle(20, 459, 20);
+        start := 0;
+      end;
+      SetBrushColor(ARGB(100, 125, 50, 200));
+      k := k + 1;
+      Circle(x[k] - d div 2, 459 - v[k], 20);
+    end;
+  end;
+  if (x[k] + d div 2) < 640 then
+  begin
+    if vk = vk_Up then
+    begin
+      if start = 0 then
+      begin
+        SetBrushColor(clWhite);
+        Circle(x[k] - d div 2, 459 - v[k], 20);
+      end
+      else
+      begin
+        SetBrushColor(clWhite);
+        Circle(20, 459, 20);
+        start := 0;
+      end;
+      SetBrushColor(ARGB(100, 125, 50, 200));
+      k := k + 2;
+      Circle(x[k] - d div 2, 459 - v[k], 20);
+    end;
+  end;
+  if x[k] - d div 2 = x1[k] then
+    cf := cf + 1;
   SetBrushColor(clWhite);
-  Circle(x1, 480 - v[k], 20);
-  SetBrushColor(ARGB(100, 125, 50, 200));
-  x1 := x1 + d;
-  Circle(x1, 480 - v[k], 20);
+  TextOut(0, 0, cf);
+end;
+
+procedure Coins;
+begin
+  l := random(1, 3);
+  if l = 2 then
+  begin
+    Circle(x[m - 1] + d div 2, 460 - v[m], 20);
+    x1[m] := 1;
+  end;
 end;
 
 begin
   Read(n);
-  x1 := 20;
-  d :=  640 div n - 40 div n;
-  x := 40;
+  start := 1;
+  SetPenColor(clWhite);
+  x[0] := 40;
+  d := 640 div n - x[0] div n;
   if (n > 10) or (n < 0) then
     ClearWindow(clBlue)
   else
   begin
     SetBrushColor(ARGB(100, 125, 50, 200));
-    Circle(x1, 460, 20);
-    SetBrushColor(ARGB(100, 50, 200, 125));
+    Circle(20, 459, 20);
     for m := 1 to n do
     begin
       v[m] := random(25, 400);
-      a[m] := v;
-      Rectangle(x, 480, x + d, 480 - a[m]);
-      x := x + d;
+      SetBrushColor(ARGB(100, 50, 200, 125));
+      SetPenColor(clBlack);
+      Rectangle(x[m - 1], 480, x[m - 1] + d, 480 - v[m]);
+      SetPenColor(clWhite);
+      SetBrushColor(rgb(255, 250, 180));
+      Coins;
+      x[m] := x[m - 1] + d;
     end;
     OnKeyDown := Move;
   end;
