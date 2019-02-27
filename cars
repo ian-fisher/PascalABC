@@ -1,0 +1,31 @@
+Uses GraphAbc, Race;
+
+var
+  mas: arr;
+  m, n, l, y, w, d, k: integer;
+
+begin
+  Read(n);
+  if n >= 11 then
+  begin
+    MaximizeWindow;
+    ClearWindow(clBlue);
+    Redraw;
+  end
+  else
+  begin
+    l := 480 div n;
+    Draw_field(n);
+    RedRaw;
+    m := 1;
+    for k := 1 to n do
+    begin
+      Read(mas[k]);
+      go(k, mas);
+      if mas[k] > mas[m] then
+        m := k;
+      gold(m);
+      RedRaw;
+    end;
+  end;
+end.
