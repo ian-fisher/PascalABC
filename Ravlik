@@ -1,0 +1,54 @@
+Uses GraphABC;
+
+var  
+  day : boolean;
+procedure BG();
+begin
+  begin
+  if day = true then
+    Draw('day.jpg', 0, 0, 1500, 820)
+  else 
+    Draw('night.jpg', 0, 0, 1500, 820);
+  Draw('bricks.png', 530, 320, 100, 500);
+  Draw('bbb.jpg', 530, 300, 100, 20);
+  end;
+end;
+
+procedure User();
+var
+  move : boolean;
+  d, n, y : integer;
+begin
+  day := true;
+  BG;
+  Read(d, n);
+  While move = false do
+  begin
+    BG;
+    Draw('aaa.jpg', 630, 820 - y - 30, 25, 30);
+    if day = true then
+      begin
+        y := y + d;
+        day := false;
+      end
+    else
+      begin
+        y := y - n;
+        day := true;
+      end;
+    RedRaw;
+    if y >= 500 then
+      begin
+        y := 500;
+        move := true;
+      end;
+    Sleep(70);
+  end;
+end; 
+
+Begin
+  LockDrawing;
+  SetWindowSize(1500, 820);
+  CenterWindow;
+  User;
+End.
