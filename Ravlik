@@ -1,54 +1,65 @@
 Uses GraphABC;
 
-var  
-  day : boolean;
+var
+  day: boolean;
+
 procedure BG();
 begin
   begin
-  if day = true then
-    Draw('day.jpg', 0, 0, 1500, 820)
-  else 
-    Draw('night.jpg', 0, 0, 1500, 820);
-  Draw('bricks.png', 530, 320, 100, 500);
-  Draw('bbb.jpg', 530, 300, 100, 20);
+    if day = false then
+      Draw('day.jpg', 0, 0, 1500, 820)
+    else 
+      Draw('night.jpg', 0, 0, 1500, 820);
+    Draw('bricks.png', 530, 320, 100, 500);
+    Draw('bbb.jpg', 530, 300, 100, 20);
   end;
 end;
 
 procedure User();
 var
-  move : boolean;
-  d, n, y : integer;
+  move: boolean;
+  d, n, y, r: integer;
 begin
+  y := 0;
   day := true;
   BG;
   Read(d, n);
-  While move = false do
+  while move = false do
   begin
-    BG;
-    Draw('aaa.jpg', 630, 820 - y - 30, 25, 30);
     if day = true then
+    begin
+      for r := 1 to d do
       begin
-        y := y + d;
+        y := y + 1;
         day := false;
-      end
+        BG;
+        Draw('aaa.jpg', 630, 820 - y - 30, 25, 30);
+        Redraw;
+      end;
+    end
     else
+    begin
+      for r := -1 downto -n do
       begin
-        y := y - n;
+        y := y - 1;
+        BG;
+        Draw('aaa.jpg', 630, 820 - y - 30, 25, 30);
         day := true;
+        Redraw;
       end;
-    RedRaw;
+    end;
     if y >= 500 then
-      begin
-        y := 500;
-        move := true;
-      end;
+    begin
+      y := 500;
+      move := true;
+    end;
     Sleep(70);
   end;
-end; 
+end;
 
-Begin
+begin
   LockDrawing;
   SetWindowSize(1500, 820);
   CenterWindow;
   User;
-End.
+end.
