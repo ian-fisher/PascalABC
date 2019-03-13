@@ -1,0 +1,65 @@
+Uses GraphABC;
+
+type
+  arr = array[1..100] of integer;
+
+const
+  w = 32;
+
+
+
+procedure Swap(var a, b: integer);
+var
+  t: integer;
+begin
+  t := a;
+  a := b;
+  b := t;
+end;
+
+procedure DrawStolbiki(a: arr; n: integer);
+var
+  k: integer;
+begin
+  ClearWindow;
+  for k := 0 to n - 1 do
+    Rectangle(w * k, 480, w * (k + 1), 480 - a[k + 1]);
+  Redraw;
+end;
+
+
+
+procedure sort(var a: arr; n: integer);
+var
+  k, l, number_max: integer;
+begin
+  for k := n downto 2 do
+  begin
+    number_max := 1;
+    for l := 1 to k do
+      if a[number_max] < a[l] then
+      begin
+        number_max := l;
+      end;
+    swap(a[number_max], a[k]);
+    Sleep(50);
+    DrawStolbiki(a, n);
+  end;
+end;
+
+var
+  i, n: integer;
+  h: arr;
+
+begin
+  LockDrawing;
+  SetBrushColor(clRed);
+  Write('5 < n < 20 !!!');
+  Redraw;
+  Read(n);
+  ClearWindow;
+  for i := 1 to n do
+    h[i] := random(1, 480);
+  DrawStolbiki(h, n);
+  sort(h, n);
+end.
