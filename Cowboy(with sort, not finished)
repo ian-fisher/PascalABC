@@ -1,0 +1,90 @@
+Uses GraphABC;
+
+var
+  p: boolean;
+  n: integer;
+
+type
+  arr = array[1..100] of integer;
+
+const
+  w = 32;
+
+
+
+procedure Swap(var a, b: integer);
+var
+  t: integer;
+begin
+  t := a;
+  a := b;
+  b := t;
+end;
+
+procedure Space(vk: integer);
+begin
+  if vk = vk_space then
+    p := false;
+end;
+
+procedure Enemy(x, y, md: integer);
+var
+  k: integer;
+begin
+  if p = true then
+  begin
+    Circle(x, 460, 20);
+    n := n + 1;
+  end;
+  Redraw;
+end;
+
+procedure sort(var a: arr);
+var
+  k, l, number_max: integer;
+begin
+  for k := n downto 2 do
+  begin
+    number_max := 1;
+    for l := 1 to k do
+      if a[number_max] < a[l] then
+      begin
+        number_max := l;
+      end;
+    swap(a[number_max], a[k]);
+  end;
+end;
+
+procedure Fight();
+var 
+  k, q : integer;
+begin
+  for k := q to n;
+  begin
+    while x1 < 300 and x1 > 340 do
+    begin
+    
+    end;
+  end;
+end;
+
+var
+  i: integer;
+  h: arr;
+
+begin
+  LockDrawing;
+  p := true;
+  SetBrushColor(clYellow);
+  Redraw;
+  ClearWindow;
+  for i := 1 to n do
+    h[i] := random(1, 480);
+  Circle(320, 460, 20);
+  Redraw;
+  SetBrushColor(clRed);
+  OnMouseDown := Enemy;
+  OnKeyDown := Space;
+  sort(h);
+  Fight;
+end.
