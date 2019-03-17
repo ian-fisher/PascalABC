@@ -2,7 +2,7 @@ Uses GraphABC;
 
 var
   p: boolean;
-  n: integer;
+  n, v: integer;
 
 type
   arr = array[1..100] of integer;
@@ -10,7 +10,8 @@ type
 const
   w = 32;
 
-
+var
+  x1: arr;
 
 procedure Swap(var a, b: integer);
 var
@@ -35,6 +36,7 @@ begin
   begin
     Circle(x, 460, 20);
     n := n + 1;
+    x1[n] := x;
   end;
   Redraw;
 end;
@@ -56,15 +58,18 @@ begin
 end;
 
 procedure Fight();
-var 
-  k, q : integer;
+var
+  j: integer;
 begin
-  for k := q to n;
   begin
-    while x1 < 300 and x1 > 340 do
+    for j := 1 to n do
     begin
-    
+      if x1[j] > 340 then
+        x1[j] := x1[j] - v
+      else if x1[j] < 300 then
+        x1[j] := x1[j] + v;
     end;
+    Redraw;
   end;
 end;
 
@@ -75,6 +80,7 @@ var
 begin
   LockDrawing;
   p := true;
+  v := 50;
   SetBrushColor(clYellow);
   Redraw;
   ClearWindow;
